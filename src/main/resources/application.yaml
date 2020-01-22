@@ -1,0 +1,11 @@
+jgp:
+  config:
+    reference-packages: javax.persistence,
+      java.lang,java.time,
+      com.idaoben.web.common.api.bean,
+      io.swagger.annotations,
+      org.springframework.web.bind.annotation,
+      org.springframework.stereotype,
+      javax.annotation,
+      com.idaoben.web.common.api.bean
+
