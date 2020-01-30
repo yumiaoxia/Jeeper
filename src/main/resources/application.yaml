@@ -1,4 +1,4 @@
-jgp:
+jeeper:
   config:
     reference-packages: javax.persistence,
       java.lang,java.time,
