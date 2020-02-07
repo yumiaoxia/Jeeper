@@ -6,9 +6,7 @@ import com.squareup.javapoet.TypeSpec;
 import javax.lang.model.element.Modifier;
 import java.util.List;
 
-public abstract class TypeVO {
-
-    private String simpleName;
+public class TypeVO extends AbstractSignatureVO{
 
     private String superClassName;
 
@@ -30,32 +28,15 @@ public abstract class TypeVO {
 
     private List<String> enumConstants;
 
-    private String signature;
 
-    public TypeVO(String simpleName, TypeSpec.Kind kind, Modifier... modifiers) {
-        this.simpleName = simpleName;
+    public TypeVO(String signature, TypeSpec.Kind kind,AbstractSignatureVO parentVO, Modifier... modifiers) {
+        super(signature,parentVO);
         this.modifiers = modifiers;
         this.kind = kind;
     }
 
-    public String getSignature() {
-        return signature;
-    }
-
-    public void setSignature(String signature) {
-        this.signature = signature;
-    }
-
     public TypeSpec.Kind getKind() {
         return kind;
-    }
-
-    public String getSimpleName() {
-        return simpleName;
-    }
-
-    public void setSimpleName(String simpleName) {
-        this.simpleName = simpleName;
     }
 
     public String getSuperClassName() {

@@ -4,7 +4,7 @@ import javax.lang.model.element.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FieldVO {
+public class FieldVO extends AbstractSignatureVO{
 
     private String name;
 
@@ -19,6 +19,10 @@ public class FieldVO {
     private Boolean getter;
 
     private Boolean setter;
+
+    public FieldVO(String signature, AbstractSignatureVO parentVO) {
+        super(signature, parentVO);
+    }
 
     public Modifier[] getModifiers() {
         return modifiers;

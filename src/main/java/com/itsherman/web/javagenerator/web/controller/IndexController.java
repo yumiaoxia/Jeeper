@@ -1,6 +1,6 @@
 package com.itsherman.web.javagenerator.web.controller;
 
-import com.itsherman.commonweb.response.ApiResponse;
+import com.itsherman.web.common.response.ApiResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;

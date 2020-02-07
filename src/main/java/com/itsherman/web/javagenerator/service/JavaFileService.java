@@ -4,5 +4,5 @@ import com.itsherman.web.javagenerator.service.vo.JavaFileVO;
 
 public interface JavaFileService {
 
-    void createJavaFile(JavaFileVO javaFileVO, String signature);
+    void createJavaFile(JavaFileVO javaFileVO, String signature) throws ClassNotFoundException;
 }

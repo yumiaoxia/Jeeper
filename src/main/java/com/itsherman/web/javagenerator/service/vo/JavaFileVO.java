@@ -2,7 +2,7 @@ package com.itsherman.web.javagenerator.service.vo;
 
 import java.util.Map;
 
-public class JavaFileVO {
+public class JavaFileVO extends AbstractSignatureVO{
 
     private String configTitle;
 
@@ -11,6 +11,7 @@ public class JavaFileVO {
     private Map<String, Object[]> commentMap;
 
     public JavaFileVO(TypeVO typeVO) {
+        super(null,null);
         this.typeVO = typeVO;
     }
 
@@ -37,4 +38,5 @@ public class JavaFileVO {
     public void setTypeVO(TypeVO typeVO) {
         this.typeVO = typeVO;
     }
+
 }

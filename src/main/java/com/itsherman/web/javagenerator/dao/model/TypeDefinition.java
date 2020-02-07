@@ -33,7 +33,7 @@ public class TypeDefinition extends ModelDefinition {
 
     private List<String> enumConstants = Collections.emptyList();
 
-    public TypeDefinition(String signature, TypeSpec.Kind kind, String typeName, Modifier... modifiers) {
+    public TypeDefinition(String signature, TypeSpec.Kind kind, Modifier... modifiers) {
         super(signature);
         this.kind = kind;
         this.typeName = typeName;

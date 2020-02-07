@@ -1,12 +1,20 @@
 package com.itsherman.web.javagenerator.service.vo;
 
+import com.itsherman.web.javagenerator.utils.SignatureGenerateUtils;
+
 import java.util.List;
 
-public class AnnotationVO {
+public class AnnotationVO extends AbstractSignatureVO{
 
     private String typeName;
 
-    private List<AnnotationPropertyVO> annotationProperties;
+    private AnnotationPropertyVO[] annotationProperties;
+
+    public AnnotationVO(String typeName, AbstractSignatureVO parentVO,AnnotationPropertyVO... annotationProperties) {
+        super(SignatureGenerateUtils.annotation(parentVO.getSignature(),typeName.substring(typeName.lastIndexOf("."))), parentVO);
+        this.annotationProperties = annotationProperties;
+    }
+
 
     public String getTypeName() {
         return typeName;
@@ -16,11 +24,11 @@ public class AnnotationVO {
         this.typeName = typeName;
     }
 
-    public List<AnnotationPropertyVO> getAnnotationProperties() {
+    public AnnotationPropertyVO[] getAnnotationProperties() {
         return annotationProperties;
     }
 
-    public void setAnnotationProperties(List<AnnotationPropertyVO> annotationProperties) {
+    public void setAnnotationProperties(AnnotationPropertyVO[] annotationProperties) {
         this.annotationProperties = annotationProperties;
     }
 }

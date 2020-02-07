@@ -1,5 +1,7 @@
 package com.itsherman.web.javagenerator.exception;
 
-public interface ErrorCode {
+import com.itsherman.web.common.exception.CommonErrorCode;
+
+public interface ErrorCode extends CommonErrorCode {
 
 }

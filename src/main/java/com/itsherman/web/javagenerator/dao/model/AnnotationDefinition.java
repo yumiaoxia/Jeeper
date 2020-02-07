@@ -9,19 +9,19 @@ import java.util.List;
  */
 public class AnnotationDefinition extends ModelDefinition {
 
-    private Class<? extends Annotation> annotationType;
+    private Class annotationType;
     private List<AnnotationAttribute> annotationAttributes = new ArrayList<>();
 
-    public AnnotationDefinition(String signature, Class<? extends Annotation> annotationType) {
+    public AnnotationDefinition(String signature, Class annotationType) {
         super(signature);
         this.annotationType = annotationType;
     }
 
-    public Class<? extends Annotation> getAnnotationType() {
+    public Class getAnnotationType() {
         return annotationType;
     }
 
-    public void setAnnotationType(Class<? extends Annotation> annotationType) {
+    public void setAnnotationType(Class annotationType) {
         this.annotationType = annotationType;
     }
 

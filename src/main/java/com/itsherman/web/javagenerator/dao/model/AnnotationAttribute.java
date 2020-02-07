@@ -12,6 +12,11 @@ public class AnnotationAttribute {
 
     private Set<Object> attrValue = new HashSet<>();
 
+    public AnnotationAttribute(String attrName, Set<Object> attrValue) {
+        this.attrName = attrName;
+        this.attrValue = attrValue;
+    }
+
     public String getAttrName() {
         return attrName;
     }
