@@ -3,6 +3,7 @@ package com.itsherman.web.javagenerator.dao.task;
 import com.itsherman.web.javagenerator.dao.model.AnnotationDefinition;
 import com.itsherman.web.javagenerator.dao.model.MethodDefinition;
 import com.itsherman.web.javagenerator.dao.model.ParameterDefinition;
+import com.itsherman.web.javagenerator.utils.TypeNameUtils;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.MethodSpec;
 import org.springframework.util.CollectionUtils;
@@ -20,36 +21,35 @@ public class MethodTask extends GeneralTask<MethodSpec> {
 
     @Override
     public MethodSpec run() {
-        MethodSpec methodSpec = MethodSpec.methodBuilder(methodDefinition.getMethodName())
-                .addModifiers(methodDefinition.getModifiers())
-                .returns(methodDefinition.getReturnType())
-                .build();
+        MethodSpec.Builder builder = MethodSpec.methodBuilder(methodDefinition.getMethodName())
+                .returns(TypeNameUtils.getTypeName(methodDefinition.getReturnType()))
+                .addModifiers(methodDefinition.getModifiers());
 
         if (!CollectionUtils.isEmpty(methodDefinition.getAnnotationDefinitions())) {
             for (AnnotationDefinition annotationDefinition : methodDefinition.getAnnotationDefinitions()) {
                 AnnotationTask annotationTask = new AnnotationTask(annotationDefinition);
-                methodSpec.toBuilder().addAnnotation(annotationTask.run());
+                builder.addAnnotation(annotationTask.run());
             }
         }
 
         if (!CollectionUtils.isEmpty(methodDefinition.getCodeList())) {
             for (Map.Entry<String, Object[]> codeEntry : methodDefinition.getCodeList()) {
-                methodSpec.toBuilder().addCode(codeEntry.getKey(), codeEntry.getValue());
+                builder.addCode(codeEntry.getKey(), codeEntry.getValue());
             }
         }
 
         if (!CollectionUtils.isEmpty(methodDefinition.getThrowsExceptionTypes())) {
             for (Class throwsExceptionType : methodDefinition.getThrowsExceptionTypes()) {
-                methodSpec.toBuilder().addException(ClassName.get(throwsExceptionType));
+               builder.addException(ClassName.get(throwsExceptionType));
             }
         }
 
         if (!CollectionUtils.isEmpty(methodDefinition.getParameterDefinitions())) {
             for (ParameterDefinition parameterDefinition : methodDefinition.getParameterDefinitions()) {
                 ParameterTask parameterTask = new ParameterTask(parameterDefinition);
-                methodSpec.toBuilder().addParameter(parameterTask.run());
+                builder.addParameter(parameterTask.run());
             }
         }
-        return methodSpec;
+        return builder.build();
     }
 }

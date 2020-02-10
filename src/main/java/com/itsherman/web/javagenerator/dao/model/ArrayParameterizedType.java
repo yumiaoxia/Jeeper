@@ -1,11 +1,11 @@
 package com.itsherman.web.javagenerator.dao.model;
 
-public class ArrayParameterDefinition extends ParameterDefinition {
+public class ArrayParameterizedType extends ParameterizedType {
 
     private ParameterizedType parameterizedType;
 
-    public ArrayParameterDefinition(String signature, String parameterName, ParameterEnum parameterEnum,ParameterizedType parameterizedType) {
-        super(signature, parameterName, parameterEnum);
+    public ArrayParameterizedType(ParameterizedEnum parameterizedEnum,ParameterizedType parameterizedType) {
+        super(parameterizedEnum);
         this.parameterizedType = parameterizedType;
     }
 

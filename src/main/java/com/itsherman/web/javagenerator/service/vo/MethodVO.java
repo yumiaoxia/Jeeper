@@ -1,10 +1,13 @@
 package com.itsherman.web.javagenerator.service.vo;
 
+import com.itsherman.web.javagenerator.dao.model.Signaturable;
+import com.itsherman.web.javagenerator.utils.SignatureGenerateUtils;
+
 import javax.lang.model.element.Modifier;
 import java.util.List;
 import java.util.Map;
 
-public class MethodVO {
+public class MethodVO extends AbstractSignatureVO {
 
     private String methodName;
 
@@ -17,6 +20,13 @@ public class MethodVO {
     private Map<String, Object[]> stateMap;
 
     private Map<String, Object[]> commentMap;
+
+    public MethodVO(AbstractSignatureVO parentVO,String methodName,String returnTypeName,Modifier... modifiers) {
+        super(SignatureGenerateUtils.member(parentVO.getSignature(),methodName), parentVO);
+        this.methodName = methodName;
+        this.returnTypeName = returnTypeName;
+        this.modifiers = modifiers;
+    }
 
     public String getMethodName() {
         return methodName;

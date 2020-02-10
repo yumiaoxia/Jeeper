@@ -10,9 +10,9 @@ public class MethodDefinition extends ModelDefinition {
 
     private String methodName;
 
-    private Type returnType = Void.TYPE;
+    private ParameterizedType returnType;
 
-    private Modifier[] modifiers = new Modifier[]{};
+    private Modifier[] modifiers;
 
     private List<AnnotationDefinition> annotationDefinitions = Collections.emptyList();
 
@@ -22,9 +22,11 @@ public class MethodDefinition extends ModelDefinition {
 
     private List<ParameterDefinition> parameterDefinitions = Collections.emptyList();
 
-    public MethodDefinition(String signature, String methodName) {
+    public MethodDefinition(String signature, String methodName,ParameterizedType returnType, Modifier... modifiers) {
         super(signature);
         this.methodName = methodName;
+        this.returnType = returnType;
+        this.modifiers = modifiers;
     }
 
     public List<Class<? extends Exception>> getThrowsExceptionTypes() {
@@ -51,11 +53,11 @@ public class MethodDefinition extends ModelDefinition {
         this.methodName = methodName;
     }
 
-    public Type getReturnType() {
+    public ParameterizedType getReturnType() {
         return returnType;
     }
 
-    public void setReturnType(Type returnType) {
+    public void setReturnType(ParameterizedType returnType) {
         this.returnType = returnType;
     }
 

@@ -15,7 +15,7 @@ public class FieldDefinition extends ModelDefinition {
 
     private Object defaultValue;
 
-    private Set<Modifier> modifiers = Collections.emptySet();
+    private Modifier[] modifiers = new Modifier[]{};
 
     private List<AnnotationDefinition> annotationDefinitions = Collections.emptyList();
 
@@ -23,13 +23,14 @@ public class FieldDefinition extends ModelDefinition {
 
     private boolean setter;
 
-    public FieldDefinition(Type fieldType, String signature, String fieldName, Object defaultValue, boolean getter, boolean setter) {
+    public FieldDefinition(Type fieldType, String signature, String fieldName, Object defaultValue, boolean getter, boolean setter,Modifier... modifiers) {
         super(signature);
         this.fieldType = fieldType;
         this.fieldName = fieldName;
         this.defaultValue = defaultValue;
         this.getter = getter;
         this.setter = setter;
+        this.modifiers = modifiers;
     }
 
     public Type getFieldType() {
@@ -56,11 +57,11 @@ public class FieldDefinition extends ModelDefinition {
         this.defaultValue = defaultValue;
     }
 
-    public Set<Modifier> getModifiers() {
+    public Modifier[] getModifiers() {
         return modifiers;
     }
 
-    public void setModifiers(Set<Modifier> modifiers) {
+    public void setModifiers(Modifier[] modifiers) {
         this.modifiers = modifiers;
     }
 

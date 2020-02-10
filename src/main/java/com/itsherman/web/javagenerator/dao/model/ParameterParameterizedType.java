@@ -1,15 +1,13 @@
 package com.itsherman.web.javagenerator.dao.model;
 
-import java.lang.reflect.Type;
-
-public class ParameterizedParameterDefinition extends ParameterDefinition {
+public class ParameterParameterizedType extends ParameterizedType{
 
     private Class rawType;
 
     private ParameterizedType[] parameterizedTypes;
 
-    public ParameterizedParameterDefinition(String signature, String parameterName, ParameterEnum parameterType, Class rawType, ParameterizedType[] parameterizedTypes) {
-        super(signature, parameterName, parameterType);
+    public ParameterParameterizedType(ParameterizedEnum parameterizedEnum, Class rawType, ParameterizedType... parameterizedTypes) {
+        super(parameterizedEnum);
         this.rawType = rawType;
         this.parameterizedTypes = parameterizedTypes;
     }

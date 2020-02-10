@@ -16,7 +16,6 @@ public class JavaFileDefinition extends ModelDefinition {
     public JavaFileDefinition(String signature, TypeDefinition typeDefinition) {
         super(signature);
         this.typeDefinition = typeDefinition;
-        packageName = signature.substring(0, signature.lastIndexOf(SignatureGenerateUtils.SIGNATURE_SEPARATOR));
     }
 
     public String getPackageName() {

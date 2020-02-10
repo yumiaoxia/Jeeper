@@ -8,13 +8,13 @@ public abstract class ParameterDefinition extends ModelDefinition {
 
     private String parameterName;
     private Modifier[] modifiers = new Modifier[]{};
-    private Class parameterType;
+    private ParameterEnum parameterEnum;
     private List<AnnotationDefinition> annotationDefinitions = Collections.emptyList();
 
-    public ParameterDefinition(String signature, String parameterName, Class parameterType) {
+    public ParameterDefinition(String signature, String parameterName, ParameterEnum parameterEnum) {
         super(signature);
         this.parameterName = parameterName;
-        this.parameterType = parameterType;
+        this.parameterEnum = parameterEnum;
     }
 
     public String getParameterName() {
@@ -33,12 +33,12 @@ public abstract class ParameterDefinition extends ModelDefinition {
         this.modifiers = modifiers;
     }
 
-    public Class getParameterType() {
-        return parameterType;
+    public ParameterEnum getParameterEnum() {
+        return parameterEnum;
     }
 
-    public void setParameterType(Class parameterType) {
-        this.parameterType = parameterType;
+    public void setParameterEnum(ParameterEnum parameterEnum) {
+        this.parameterEnum = parameterEnum;
     }
 
     public List<AnnotationDefinition> getAnnotationDefinitions() {
@@ -47,5 +47,14 @@ public abstract class ParameterDefinition extends ModelDefinition {
 
     public void setAnnotationDefinitions(List<AnnotationDefinition> annotationDefinitions) {
         this.annotationDefinitions = annotationDefinitions;
+    }
+
+
+    public enum ParameterEnum{
+        ARRAY,
+        PARAMETERIZED,
+        CLASS,
+        TYPE_VARIABLE,
+        WILDCARD
     }
 }

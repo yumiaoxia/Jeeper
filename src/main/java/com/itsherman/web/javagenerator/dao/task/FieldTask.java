@@ -27,8 +27,7 @@ public class FieldTask extends GeneralTask<FieldSpec> {
 
     @Override
     public FieldSpec run() {
-        Set<Modifier> modifiers = fieldDefinition.getModifiers();
-        FieldSpec fieldSpec = FieldSpec.builder(fieldDefinition.getFieldType(), fieldDefinition.getFieldName(), modifiers.toArray(new Modifier[0])).build();
+        FieldSpec fieldSpec = FieldSpec.builder(fieldDefinition.getFieldType(), fieldDefinition.getFieldName(), fieldDefinition.getModifiers()).build();
         List<AnnotationDefinition> annotationDefinitions = fieldDefinition.getAnnotationDefinitions();
         for (AnnotationDefinition annotationDefinition : annotationDefinitions) {
             AnnotationTask annotationTask = new AnnotationTask(annotationDefinition);

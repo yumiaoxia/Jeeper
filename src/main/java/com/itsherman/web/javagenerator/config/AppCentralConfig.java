@@ -8,6 +8,8 @@ import java.util.List;
 @Component
 public class AppCentralConfig {
 
+    private String targetPathOfProject;
+
     private String basePackage;
 
     private List<SubPackageConfig> subPackageConfigs;
@@ -24,4 +26,11 @@ public class AppCentralConfig {
         return subPackageConfigs;
     }
 
+    public String getTargetPathOfProject() {
+        return targetPathOfProject;
+    }
+
+    public void setTargetPathOfProject(String targetPathOfProject) {
+        this.targetPathOfProject = targetPathOfProject;
+    }
 }

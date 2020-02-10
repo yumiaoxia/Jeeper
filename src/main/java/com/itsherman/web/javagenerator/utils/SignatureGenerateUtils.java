@@ -14,19 +14,27 @@ public class SignatureGenerateUtils {
         if(simpleName == null){
             throw new SignatureException("The simpleName can not be null!");
         }
-        return parentSignature  + SignatureConstant.ANNOTATION +simpleName;
+        return parentSignature  + SignatureConstant.SEPARATION + SignatureConstant.ANNOTATION +simpleName;
     }
 
-    public static String type(String basePackageName, String subPackage, String typeSimpleName) {
-        if (StringUtils.isEmpty(basePackageName) || StringUtils.isEmpty(typeSimpleName)) {
-            throw new SignatureException("The basePackageName or subPackage can not be null!");
+    public static String member(String parentSignature, String name){
+        if(parentSignature == null){
+            throw new SignatureException("The parentSignature can not be null!");
         }
-        String result = basePackageName;
-        if (!StringUtils.isEmpty(subPackage)) {
-            result = result + SignatureConstant.TYPE + subPackage;
+        if(name == null){
+            throw new SignatureException("The name can not be null!");
         }
-        String replace = typeSimpleName.replace(typeSimpleName.substring(0, 1), typeSimpleName.substring(0, 1).toUpperCase());
-
-        return basePackageName + SignatureConstant.TYPE + subPackage + SignatureConstant.TYPE + replace;
+        return parentSignature + SignatureConstant.SEPARATION + SignatureConstant.MEMBER + name;
     }
+
+    public static String parameter(String parentSignature, String name){
+        if(parentSignature == null){
+            throw new SignatureException("The parentSignature can not be null!");
+        }
+        if(name == null){
+            throw new SignatureException("The name can not be null!");
+        }
+        return parentSignature + SignatureConstant.SEPARATION + SignatureConstant.PARAMETER + name;
+    }
+
 }

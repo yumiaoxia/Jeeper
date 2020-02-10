@@ -1,5 +1,7 @@
 package com.itsherman.web.javagenerator.service.vo;
 
+import com.itsherman.web.javagenerator.utils.SignatureGenerateUtils;
+
 import javax.lang.model.element.Modifier;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +22,9 @@ public class FieldVO extends AbstractSignatureVO{
 
     private Boolean setter;
 
-    public FieldVO(String signature, AbstractSignatureVO parentVO) {
-        super(signature, parentVO);
+    public FieldVO(AbstractSignatureVO parentVO,String name) {
+        super(SignatureGenerateUtils.member(parentVO.getSignature(),name), parentVO);
+        this.name = name;
     }
 
     public Modifier[] getModifiers() {
