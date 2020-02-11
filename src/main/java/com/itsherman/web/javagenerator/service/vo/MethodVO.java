@@ -11,21 +11,31 @@ public class MethodVO extends AbstractSignatureVO {
 
     private String methodName;
 
-    private String returnTypeName;
+    private TypeVO returnTypeVO;
+
+    private ParameterTypeVO[] parameterTypeVOS;
 
     private Modifier[] modifiers;
 
     private List<AnnotationVO> annotations;
 
-    private Map<String, Object[]> stateMap;
+    private Map<String, Object[]> statementMap;
 
     private Map<String, Object[]> commentMap;
 
-    public MethodVO(AbstractSignatureVO parentVO,String methodName,String returnTypeName,Modifier... modifiers) {
+    public MethodVO(AbstractSignatureVO parentVO,String methodName,TypeVO returnTypeVO, Modifier... modifiers) {
         super(SignatureGenerateUtils.member(parentVO.getSignature(),methodName), parentVO);
         this.methodName = methodName;
-        this.returnTypeName = returnTypeName;
+        this.returnTypeVO = returnTypeVO;
         this.modifiers = modifiers;
+    }
+
+    public ParameterTypeVO[] getParameterTypeVOS() {
+        return parameterTypeVOS;
+    }
+
+    public void setParameterTypeVOS(ParameterTypeVO[] parameterTypeVOS) {
+        this.parameterTypeVOS = parameterTypeVOS;
     }
 
     public String getMethodName() {
@@ -36,12 +46,12 @@ public class MethodVO extends AbstractSignatureVO {
         this.methodName = methodName;
     }
 
-    public String getReturnTypeName() {
-        return returnTypeName;
+    public TypeVO getReturnTypeVO() {
+        return returnTypeVO;
     }
 
-    public void setReturnTypeName(String returnTypeName) {
-        this.returnTypeName = returnTypeName;
+    public void setReturnTypeVO(TypeVO returnTypeVO) {
+        this.returnTypeVO = returnTypeVO;
     }
 
     public Modifier[] getModifiers() {
@@ -60,12 +70,12 @@ public class MethodVO extends AbstractSignatureVO {
         this.annotations = annotations;
     }
 
-    public Map<String, Object[]> getStateMap() {
-        return stateMap;
+    public Map<String, Object[]> getStatementMap() {
+        return statementMap;
     }
 
-    public void setStateMap(Map<String, Object[]> stateMap) {
-        this.stateMap = stateMap;
+    public void setStatementMap(Map<String, Object[]> statementMap) {
+        this.statementMap = statementMap;
     }
 
     public Map<String, Object[]> getCommentMap() {

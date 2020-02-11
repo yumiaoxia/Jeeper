@@ -7,14 +7,13 @@ import java.util.List;
 public abstract class ParameterDefinition extends ModelDefinition {
 
     private String parameterName;
-    private Modifier[] modifiers = new Modifier[]{};
-    private ParameterEnum parameterEnum;
+    private Modifier[] modifiers;
     private List<AnnotationDefinition> annotationDefinitions = Collections.emptyList();
 
-    public ParameterDefinition(String signature, String parameterName, ParameterEnum parameterEnum) {
+    public ParameterDefinition(String signature, String parameterName,Modifier... modifiers) {
         super(signature);
         this.parameterName = parameterName;
-        this.parameterEnum = parameterEnum;
+        this.modifiers = modifiers;
     }
 
     public String getParameterName() {
@@ -31,14 +30,6 @@ public abstract class ParameterDefinition extends ModelDefinition {
 
     public void setModifiers(Modifier[] modifiers) {
         this.modifiers = modifiers;
-    }
-
-    public ParameterEnum getParameterEnum() {
-        return parameterEnum;
-    }
-
-    public void setParameterEnum(ParameterEnum parameterEnum) {
-        this.parameterEnum = parameterEnum;
     }
 
     public List<AnnotationDefinition> getAnnotationDefinitions() {

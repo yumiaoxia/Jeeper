@@ -1,7 +1,5 @@
 package com.itsherman.web.javagenerator.dao.model;
 
-import com.itsherman.web.javagenerator.utils.SignatureGenerateUtils;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,13 +7,13 @@ public class JavaFileDefinition extends ModelDefinition {
 
     private String packageName;
 
-    private TypeDefinition typeDefinition;
+    private CLassDefinition CLassDefinition;
 
     private Map<String, Object[]> commentMap = new HashMap<>();
 
-    public JavaFileDefinition(String signature, TypeDefinition typeDefinition) {
+    public JavaFileDefinition(String signature, CLassDefinition CLassDefinition) {
         super(signature);
-        this.typeDefinition = typeDefinition;
+        this.CLassDefinition = CLassDefinition;
     }
 
     public String getPackageName() {
@@ -26,12 +24,12 @@ public class JavaFileDefinition extends ModelDefinition {
         this.packageName = packageName;
     }
 
-    public TypeDefinition getTypeDefinition() {
-        return typeDefinition;
+    public CLassDefinition getCLassDefinition() {
+        return CLassDefinition;
     }
 
-    public void setTypeDefinition(TypeDefinition typeDefinition) {
-        this.typeDefinition = typeDefinition;
+    public void setCLassDefinition(CLassDefinition CLassDefinition) {
+        this.CLassDefinition = CLassDefinition;
     }
 
     public Map<String, Object[]> getCommentMap() {

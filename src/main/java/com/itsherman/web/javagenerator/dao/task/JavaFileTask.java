@@ -1,7 +1,7 @@
 package com.itsherman.web.javagenerator.dao.task;
 
 import com.itsherman.web.javagenerator.dao.model.JavaFileDefinition;
-import com.itsherman.web.javagenerator.dao.model.TypeDefinition;
+import com.itsherman.web.javagenerator.dao.model.CLassDefinition;
 import com.squareup.javapoet.JavaFile;
 import org.springframework.util.CollectionUtils;
 
@@ -18,12 +18,12 @@ public class JavaFileTask extends GeneralTask<JavaFile> {
 
     @Override
     public JavaFile run() {
-        TypeDefinition typeDefinition = definition.getTypeDefinition();
-        if (typeDefinition == null) {
-            log.info("TypeDefinition in JavaFileDefinition is required,it can not be null!");
+        CLassDefinition CLassDefinition = definition.getCLassDefinition();
+        if (CLassDefinition == null) {
+            log.info("CLassDefinition in JavaFileDefinition is required,it can not be null!");
             throw new NullPointerException();
         }
-        TypeTask typeTask = new TypeTask(typeDefinition);
+        TypeTask typeTask = new TypeTask(CLassDefinition);
         JavaFile.Builder builder = JavaFile.builder(definition.getPackageName(), typeTask.run());
 
         if (!CollectionUtils.isEmpty(definition.getCommentMap())) {

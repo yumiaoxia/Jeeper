@@ -2,12 +2,12 @@ package com.itsherman.web.javagenerator.service.vo;
 
 import javax.lang.model.element.Modifier;
 
-public class TypeVariableParameterVO extends ParameterVO {
+public class TypeVariableVO implements TypeVO {
 
     private String variable;
 
-    public TypeVariableParameterVO(AbstractSignatureVO parentVO, String parameterName, Modifier... modifiers) {
-        super(parentVO, parameterName, modifiers);
+    public TypeVariableVO(String variable) {
+        this.variable = variable;
     }
 
     public String getVariable() {

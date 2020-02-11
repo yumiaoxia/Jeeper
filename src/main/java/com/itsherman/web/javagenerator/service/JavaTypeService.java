@@ -1,9 +1,9 @@
 package com.itsherman.web.javagenerator.service;
 
-import com.itsherman.web.javagenerator.dao.model.TypeDefinition;
-import com.itsherman.web.javagenerator.service.vo.TypeVO;
+import com.itsherman.web.javagenerator.dao.model.CLassDefinition;
+import com.itsherman.web.javagenerator.service.vo.ClassVO;
 
 public interface JavaTypeService {
 
-    TypeDefinition createJavaType(TypeVO typeVO) throws ClassNotFoundException;
+    CLassDefinition createJavaType(ClassVO classVO) throws ClassNotFoundException;
 }

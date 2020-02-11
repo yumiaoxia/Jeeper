@@ -6,13 +6,13 @@ public class JavaFileVO extends AbstractSignatureVO{
 
     private String configTitle;
 
-    private TypeVO typeVO;
+    private ClassVO classVO;
 
     private Map<String, Object[]> commentMap;
 
-    public JavaFileVO(TypeVO typeVO) {
+    public JavaFileVO(ClassVO classVO) {
         super(null,null);
-        this.typeVO = typeVO;
+        this.classVO = classVO;
     }
 
     public Map<String, Object[]> getCommentMap() {
@@ -31,12 +31,12 @@ public class JavaFileVO extends AbstractSignatureVO{
         this.configTitle = configTitle;
     }
 
-    public TypeVO getTypeVO() {
-        return typeVO;
+    public ClassVO getClassVO() {
+        return classVO;
     }
 
-    public void setTypeVO(TypeVO typeVO) {
-        this.typeVO = typeVO;
+    public void setClassVO(ClassVO classVO) {
+        this.classVO = classVO;
     }
 
 }

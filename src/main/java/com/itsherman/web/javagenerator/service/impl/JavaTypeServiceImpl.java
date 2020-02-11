@@ -1,11 +1,11 @@
 package com.itsherman.web.javagenerator.service.impl;
 
-import com.itsherman.web.javagenerator.dao.model.TypeDefinition;
+import com.itsherman.web.javagenerator.dao.model.CLassDefinition;
 import com.itsherman.web.javagenerator.service.AnnotationService;
 import com.itsherman.web.javagenerator.service.JavaTypeService;
 import com.itsherman.web.javagenerator.service.vo.AnnotationVO;
 import com.itsherman.web.javagenerator.service.vo.FieldVO;
-import com.itsherman.web.javagenerator.service.vo.TypeVO;
+import com.itsherman.web.javagenerator.service.vo.ClassVO;
 import com.squareup.javapoet.TypeSpec;
 import org.apache.commons.lang3.ClassUtils;
 import org.springframework.stereotype.Service;
@@ -19,44 +19,44 @@ public class JavaTypeServiceImpl implements JavaTypeService {
     private AnnotationService annotationService;
 
     @Override
-    public TypeDefinition createJavaType(TypeVO typeVO) throws ClassNotFoundException {
+    public CLassDefinition createJavaType(ClassVO classVO) throws ClassNotFoundException {
 
-        TypeDefinition typeDefinition = new TypeDefinition(typeVO.getSignature(),typeVO.getKind(),typeVO.getModifiers());
+        CLassDefinition CLassDefinition = new CLassDefinition(classVO.getSignature(), classVO.getKind(), classVO.getModifiers());
 
         //如果是枚举,则添加枚举成员
-        if(typeVO.getKind() == TypeSpec.Kind.ENUM && typeVO.getEnumConstants() != null){
-            typeDefinition.getEnumConstants().addAll(typeVO.getEnumConstants());
+        if(classVO.getKind() == TypeSpec.Kind.ENUM && classVO.getEnumConstants() != null){
+            CLassDefinition.getEnumConstants().addAll(classVO.getEnumConstants());
         }
         // 是否继承父类
-        if(typeVO.getSuperClassName() != null){
-            typeDefinition.setSuperClass(ClassUtils.getClass(typeVO.getSuperClassName()));
+        if(classVO.getSuperClassName() != null){
+            CLassDefinition.setSuperClass(ClassUtils.getClass(classVO.getSuperClassName()));
         }
 
         // 是否有继承接口
-        if(typeVO.getSupperInterfaceNames() != null){
-            for (String supperInterfaceName : typeVO.getSupperInterfaceNames()) {
-                typeDefinition.getSuperInterfaces().add(ClassUtils.getClass(supperInterfaceName));
+        if(classVO.getSupperInterfaceNames() != null){
+            for (String supperInterfaceName : classVO.getSupperInterfaceNames()) {
+                CLassDefinition.getSuperInterfaces().add(ClassUtils.getClass(supperInterfaceName));
             }
         }
 
         //泛型
-        if(typeVO.getTypeVariableNames() != null){
-            typeDefinition.getTypeVariableNames().addAll(typeVO.getTypeVariableNames());
+        if(classVO.getTypeVariableNames() != null){
+            CLassDefinition.getTypeVariableNames().addAll(classVO.getTypeVariableNames());
         }
 
         // 注解
-        if(typeVO.getAnnotations()!=null){
-            for (AnnotationVO annotation : typeVO.getAnnotations()) {
-                typeDefinition.getAnnotationDefinitions().add(annotationService.createAnnotation(annotation));
+        if(classVO.getAnnotations()!=null){
+            for (AnnotationVO annotation : classVO.getAnnotations()) {
+                CLassDefinition.getAnnotationDefinitions().add(annotationService.createAnnotation(annotation));
             }
         }
 
-        if(typeVO.getFields()!= null){
-            for (FieldVO field : typeVO.getFields()) {
+        if(classVO.getFields()!= null){
+            for (FieldVO field : classVO.getFields()) {
 
             }
         }
 
-        return typeDefinition;
+        return CLassDefinition;
     }
 }

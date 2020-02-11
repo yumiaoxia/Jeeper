@@ -1,9 +1,9 @@
 package com.itsherman.web.javagenerator.dao.task;
 
 import com.itsherman.web.javagenerator.dao.model.AnnotationDefinition;
+import com.itsherman.web.javagenerator.dao.model.CLassDefinition;
 import com.itsherman.web.javagenerator.dao.model.FieldDefinition;
 import com.itsherman.web.javagenerator.dao.model.MethodDefinition;
-import com.itsherman.web.javagenerator.dao.model.TypeDefinition;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.TypeSpec;
@@ -13,9 +13,9 @@ public class TypeTask extends GeneralTask<TypeSpec> {
 
     private TypeSpec.Kind kind;
 
-    private TypeDefinition definition;
+    private CLassDefinition definition;
 
-    protected TypeTask(TypeDefinition definition) {
+    protected TypeTask(CLassDefinition definition) {
         super(definition, TypeTask.class);
         this.definition = definition;
         this.kind = definition.getKind();
@@ -81,9 +81,9 @@ public class TypeTask extends GeneralTask<TypeSpec> {
         }
 
         // 内部类
-        if (definition.getInnerTypeDefinitions().size() > 0) {
-            for (TypeDefinition innerTypeDefinition : definition.getInnerTypeDefinitions()) {
-                TypeTask task = new TypeTask(innerTypeDefinition);
+        if (definition.getInnerCLassDefinitions().size() > 0) {
+            for (CLassDefinition innerCLassDefinition : definition.getInnerCLassDefinitions()) {
+                TypeTask task = new TypeTask(innerCLassDefinition);
                 builder.addType(task.run());
             }
         }

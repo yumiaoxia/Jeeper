@@ -3,25 +3,48 @@ package com.itsherman.web.javagenerator.dao.task;
 import com.itsherman.web.javagenerator.dao.model.*;
 import com.itsherman.web.javagenerator.utils.TypeNameUtils;
 import com.squareup.javapoet.*;
+import org.apache.commons.lang3.ClassUtils;
 import org.springframework.util.CollectionUtils;
 import sun.reflect.generics.reflectiveObjects.GenericArrayTypeImpl;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
+import javax.lang.model.element.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParameterTask extends GeneralTask<ParameterSpec> {
 
-    private ParameterDefinition parameterDefinition;
+    private ParameterTypeDefinition definition;
 
-    public ParameterTask(ParameterDefinition parameterDefinition) {
-        super(parameterDefinition, ParameterTask.class);
-        this.parameterDefinition = parameterDefinition;
+    public ParameterTask(ParameterTypeDefinition definition) {
+        super(definition, ParameterTask.class);
+        this.definition = definition;
     }
 
     @Override
     public ParameterSpec run() {
         ParameterSpec.Builder builder = null;
+        String parameterName = definition.getParameterName();
+        Modifier[] modifiers = definition.getModifiers();
+        TypeDefinition typeDefinition = definition.getTypeDefinition();
+
+        if(typeDefinition instanceof ClassTypeDefinition){
+            ClassTypeDefinition classTypeDefinition = (ClassTypeDefinition)typeDefinition;
+            builder = ParameterSpec.builder(ClassName.get(ClassUtils.getClass(classTypeDefinition.getClassName())),parameterName,modifiers);
+        }else if(typeDefinition instanceof TypeVariableDefinition){
+            TypeVariableDefinition typeVariableDefinition = (TypeVariableDefinition)typeDefinition;
+            builder = ParameterSpec.builder(TypeVariableName.get(typeVariableDefinition.getVariable()),parameterName,modifiers);
+        }else if(typeDefinition instanceof ArrayTypeDefinition){
+            ArrayTypeDefinition arrayTypeDefinition = (ArrayTypeDefinition)typeDefinition;
+            arrayTypeDefinition.getTypeDefinition()
+            builder = ParameterSpec.builder(ArrayTypeName.of())
+        }
+
+
+
+
+
+
         if(parameterDefinition.getParameterEnum() == ParameterDefinition.ParameterEnum.CLASS){
             ClassParameterDefinition classParameterDefinition= (ClassParameterDefinition)parameterDefinition;
             builder = ParameterSpec.builder(ClassName.get(classParameterDefinition.getClassType()),classParameterDefinition.getParameterName(),classParameterDefinition.getModifiers());

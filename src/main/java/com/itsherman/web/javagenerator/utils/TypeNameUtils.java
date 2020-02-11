@@ -1,66 +1,54 @@
 package com.itsherman.web.javagenerator.utils;
 
 import com.itsherman.web.javagenerator.dao.model.*;
+import com.itsherman.web.javagenerator.enums.WildcardEnum;
 import com.squareup.javapoet.*;
+import org.apache.commons.lang3.ClassUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TypeNameUtils {
 
-    public static TypeName getTypeName(ParameterizedType parameterizedType){
+
+    public static TypeName getTypeName(TypeDefinition typeDefinition) throws ClassNotFoundException {
         TypeName typeName;
-        ParameterizedType.ParameterizedEnum parameterizedEnum = parameterizedType.getParameterizedEnum();
-        if(parameterizedEnum == ParameterizedType.ParameterizedEnum.CLASS){
-            ClassParameterizedType classParameterizedType = (ClassParameterizedType)parameterizedType;
-            typeName = ClassName.get(classParameterizedType.getClassType());
-        }else if(parameterizedEnum == ParameterizedType.ParameterizedEnum.TYPE_VARIABLE){
-            TypeVariableParameterizedType typeVariableParameterizedType = (TypeVariableParameterizedType)parameterizedType;
-            typeName = TypeVariableName.get(typeVariableParameterizedType.getVariable());
-        }else if(parameterizedEnum == ParameterizedType.ParameterizedEnum.PARAMETERIZED){
-            ParameterParameterizedType parameterParameterizedType = (ParameterParameterizedType)parameterizedType;
-            List<TypeName> typeNames = new ArrayList<>();
-            if(parameterParameterizedType.getParameterizedTypes()!=null){
-                for (ParameterizedType type : parameterParameterizedType.getParameterizedTypes()) {
-                    typeNames.add(getTypeName(type));
-                }
+        if(typeDefinition instanceof ClassTypeDefinition){
+            ClassTypeDefinition classTypeDefinition = (ClassTypeDefinition)typeDefinition;
+            typeName = ClassName.get(ClassUtils.getClass(classTypeDefinition.getClassName()));
+        }else if(typeDefinition instanceof TypeVariableDefinition){
+            TypeVariableDefinition typeVariableDefinition = (TypeVariableDefinition)typeDefinition;
+            typeName = TypeVariableName.get(typeVariableDefinition.getVariable());
+        }else if(typeDefinition instanceof ArrayTypeDefinition){
+            ArrayTypeDefinition arrayTypeDefinition = (ArrayTypeDefinition)typeDefinition;
+            TypeDefinition typeDefinition1 = arrayTypeDefinition.getTypeDefinition();
+            typeName = ArrayTypeName.of(getTypeName(typeDefinition1));
+        }else if(typeDefinition instanceof ParameterizedTypeDefinition){
+            ParameterizedTypeDefinition parameterizedTypeDefinition = (ParameterizedTypeDefinition) typeDefinition;
+            TypeDefinition[] typeArguments = parameterizedTypeDefinition.getTypeArguments();
+            TypeName[] typeNames = new TypeName[typeArguments.length];
+            for (int i = 0; i < typeArguments.length; i++) {
+                typeNames[i] = getTypeName(typeArguments[i]);
             }
-            typeName = ParameterizedTypeName.get(ClassName.get(parameterParameterizedType.getRawType()),typeNames.toArray(new TypeName[0]));
-        }else if(parameterizedEnum == ParameterizedType.ParameterizedEnum.ARRAY){
-            ArrayParameterizedType arrayParameterizedType = (ArrayParameterizedType)parameterizedType;
-            TypeName typeName1 =  getTypeName(arrayParameterizedType.getParameterizedType());
-            typeName = ArrayTypeName.of(typeName1);
+            typeName = ParameterizedTypeName.get(ClassName.get(ClassUtils.getClass(parameterizedTypeDefinition.getRawTypeName())),typeNames);
+        }else if(typeDefinition instanceof WildcardTypeDefinition){
+            WildcardTypeDefinition wildcardTypeDefinition = (WildcardTypeDefinition)typeDefinition;
+            switch (wildcardTypeDefinition.getWildcardEnum()){
+                case SUPPER:
+                    typeName = WildcardTypeName.supertypeOf(ClassUtils.getClass(wildcardTypeDefinition.getBoundClassName()));
+                    break;
+                case SUB:
+                    typeName = WildcardTypeName.subtypeOf(ClassUtils.getClass(wildcardTypeDefinition.getBoundClassName()));
+                    break;
+                default:
+                    typeName = WildcardTypeName.get(ClassUtils.getClass(wildcardTypeDefinition.getBoundClassName()));
+                    break;
+            }
         }else{
-            throw new IllegalArgumentException("parameterizedEnum is error");
+            throw new IllegalArgumentException("No such TypeDefinition");
         }
         return typeName;
     }
 
 
-    public static ArrayTypeName  getArrayTypeName(ArrayParameterDefinition parameterDefinition){
-        ParameterizedType parameterizedType = parameterDefinition.getParameterizedType();
-        ArrayTypeName arrayTypeName = null;
-        ParameterizedType.ParameterizedEnum parameterizedEnum = parameterizedType.getParameterizedEnum();
-        if(parameterizedEnum == ParameterizedType.ParameterizedEnum.CLASS){
-            ClassParameterizedType classParameterizedType = (ClassParameterizedType)parameterizedType;
-            arrayTypeName = ArrayTypeName.of(ClassName.get(classParameterizedType.getClassType()));
-        }else if(parameterizedEnum == ParameterizedType.ParameterizedEnum.TYPE_VARIABLE){
-            TypeVariableParameterizedType typeVariableParameterizedType = (TypeVariableParameterizedType)parameterizedType;
-            arrayTypeName = ArrayTypeName.of(TypeVariableName.get(typeVariableParameterizedType.getVariable()));
-        }else if(parameterizedEnum == ParameterizedType.ParameterizedEnum.PARAMETERIZED){
-            ParameterParameterizedType parameterParameterizedType = (ParameterParameterizedType)parameterizedType;
-            ParameterizedType[] parameterizedTypes = parameterParameterizedType.getParameterizedTypes();
-            List<TypeName> typeNames = new ArrayList<>();
-            for (ParameterizedType type : parameterizedTypes) {
-                typeNames.add(getTypeName(type));
-            }
-            arrayTypeName = ArrayTypeName.of(ParameterizedTypeName.get(ClassName.get(parameterParameterizedType.getRawType()),typeNames.toArray(new TypeName[0])));
-        }else if(parameterizedEnum == ParameterizedType.ParameterizedEnum.ARRAY){
-            ArrayParameterizedType arrayParameterizedType = (ArrayParameterizedType)parameterizedType;
-            arrayTypeName = ArrayTypeName.of(getTypeName(arrayParameterizedType.getParameterizedType()));
-        }else {
-            throw new IllegalArgumentException(String.format("parameterEnum is error,task'signature is %s",parameterDefinition.getSignature()));
-        }
-        return arrayTypeName;
-    }
 }

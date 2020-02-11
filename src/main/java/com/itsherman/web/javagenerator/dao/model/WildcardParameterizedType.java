@@ -1,5 +1,7 @@
 package com.itsherman.web.javagenerator.dao.model;
 
+import com.itsherman.web.javagenerator.enums.WildcardEnum;
+
 public class WildcardParameterizedType extends ParameterizedType {
 
     private WildcardEnum wildcardEnum;
@@ -28,9 +30,4 @@ public class WildcardParameterizedType extends ParameterizedType {
         this.boundClass = boundClass;
     }
 
-    public enum WildcardEnum{
-        SUPPER,
-        SUB,
-        SELF
-    }
 }
