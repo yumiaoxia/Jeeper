@@ -1,6 +1,6 @@
 package com.itsherman.web.javagenerator.dao.model;
 
-public class ArrayTypeDefinition {
+public class ArrayTypeDefinition implements TypeDefinition{
 
     private TypeDefinition typeDefinition;
 

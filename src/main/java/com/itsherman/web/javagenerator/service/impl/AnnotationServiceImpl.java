@@ -17,6 +17,7 @@ public class AnnotationServiceImpl implements AnnotationService {
 
     @Override
     public AnnotationDefinition createAnnotation(AnnotationVO annotationVO) throws ClassNotFoundException {
+
         Class annotationClazz = ClassUtils.getClass(annotationVO.getTypeName());
         AnnotationDefinition annotationDefinition = new AnnotationDefinition(annotationVO.getSignature(),annotationClazz);
         if(annotationVO.getAnnotationProperties() != null){

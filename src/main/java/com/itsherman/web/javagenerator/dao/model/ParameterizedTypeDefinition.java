@@ -1,13 +1,13 @@
 package com.itsherman.web.javagenerator.dao.model;
 
-public class ParameterizedTypeDefinition {
+public class ParameterizedTypeDefinition implements TypeDefinition {
 
-    private String rawTypeName;
+    private Class rawType;
 
     private TypeDefinition[] typeArguments;
 
-    public ParameterizedTypeDefinition(String rawTypeName, TypeDefinition[] typeArguments) {
-        this.rawTypeName = rawTypeName;
+    public ParameterizedTypeDefinition(Class rawType, TypeDefinition[] typeArguments) {
+        this.rawType = rawType;
         this.typeArguments = typeArguments;
     }
 
@@ -19,13 +19,11 @@ public class ParameterizedTypeDefinition {
         this.typeArguments = typeArguments;
     }
 
-    public String getRawTypeName() {
-        return rawTypeName;
+    public Class getRawType() {
+        return rawType;
     }
 
-    public void setRawTypeName(String rawTypeName) {
-        this.rawTypeName = rawTypeName;
+    public void setRawType(Class rawType) {
+        this.rawType = rawType;
     }
-
-
 }

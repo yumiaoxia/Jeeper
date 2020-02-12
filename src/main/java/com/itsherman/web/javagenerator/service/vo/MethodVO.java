@@ -1,6 +1,5 @@
 package com.itsherman.web.javagenerator.service.vo;
 
-import com.itsherman.web.javagenerator.dao.model.Signaturable;
 import com.itsherman.web.javagenerator.utils.SignatureGenerateUtils;
 
 import javax.lang.model.element.Modifier;
@@ -13,11 +12,13 @@ public class MethodVO extends AbstractSignatureVO {
 
     private TypeVO returnTypeVO;
 
-    private ParameterTypeVO[] parameterTypeVOS;
+    private ParameterVO[] parameterTypeVOS;
 
     private Modifier[] modifiers;
 
     private List<AnnotationVO> annotations;
+
+    private List<String> exceptionClassNames;
 
     private Map<String, Object[]> statementMap;
 
@@ -30,11 +31,19 @@ public class MethodVO extends AbstractSignatureVO {
         this.modifiers = modifiers;
     }
 
-    public ParameterTypeVO[] getParameterTypeVOS() {
+    public List<String> getExceptionClassNames() {
+        return exceptionClassNames;
+    }
+
+    public void setExceptionClassNames(List<String> exceptionClassNames) {
+        this.exceptionClassNames = exceptionClassNames;
+    }
+
+    public ParameterVO[] getParameterTypeVOS() {
         return parameterTypeVOS;
     }
 
-    public void setParameterTypeVOS(ParameterTypeVO[] parameterTypeVOS) {
+    public void setParameterTypeVOS(ParameterVO[] parameterTypeVOS) {
         this.parameterTypeVOS = parameterTypeVOS;
     }
 

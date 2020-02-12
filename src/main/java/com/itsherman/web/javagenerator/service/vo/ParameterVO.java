@@ -1,44 +1,21 @@
 package com.itsherman.web.javagenerator.service.vo;
 
-import com.itsherman.web.javagenerator.utils.SignatureGenerateUtils;
-
 import javax.lang.model.element.Modifier;
-import java.util.List;
 
-public class ParameterVO extends AbstractSignatureVO {
+public class ParameterVO<T extends TypeVO> extends AbstractParameterVO {
 
-    private String parameterName;
+    private T typeVO;
 
-    private Modifier[] modifiers;
-
-    private List<AnnotationVO> annotationVOS;
-
-    public ParameterVO(AbstractSignatureVO parentVO, String parameterName, Modifier... modifiers) {
-        super(SignatureGenerateUtils.parameter(parentVO.getSignature(),parameterName), parentVO);
-        this.modifiers = modifiers;
+    public ParameterVO(T typeVO, AbstractSignatureVO parentVO, String parameterName, Modifier... modifiers) {
+        super(parentVO, parameterName, modifiers);
+        this.typeVO = typeVO;
     }
 
-    public String getParameterName() {
-        return parameterName;
+    public T getTypeVO() {
+        return typeVO;
     }
 
-    public void setParameterName(String parameterName) {
-        this.parameterName = parameterName;
-    }
-
-    public Modifier[] getModifiers() {
-        return modifiers;
-    }
-
-    public void setModifiers(Modifier[] modifiers) {
-        this.modifiers = modifiers;
-    }
-
-    public List<AnnotationVO> getAnnotationVOS() {
-        return annotationVOS;
-    }
-
-    public void setAnnotationVOS(List<AnnotationVO> annotationVOS) {
-        this.annotationVOS = annotationVOS;
+    public void setTypeVO(T typeVO) {
+        this.typeVO = typeVO;
     }
 }

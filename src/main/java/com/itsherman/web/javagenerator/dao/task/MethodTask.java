@@ -3,6 +3,7 @@ package com.itsherman.web.javagenerator.dao.task;
 import com.itsherman.web.javagenerator.dao.model.AnnotationDefinition;
 import com.itsherman.web.javagenerator.dao.model.MethodDefinition;
 import com.itsherman.web.javagenerator.dao.model.ParameterDefinition;
+import com.itsherman.web.javagenerator.dao.model.ParameterTypeDefinition;
 import com.itsherman.web.javagenerator.utils.TypeNameUtils;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.MethodSpec;
@@ -20,7 +21,7 @@ public class MethodTask extends GeneralTask<MethodSpec> {
     }
 
     @Override
-    public MethodSpec run() {
+    public MethodSpec run(){
         MethodSpec.Builder builder = MethodSpec.methodBuilder(methodDefinition.getMethodName())
                 .returns(TypeNameUtils.getTypeName(methodDefinition.getReturnType()))
                 .addModifiers(methodDefinition.getModifiers());
@@ -44,8 +45,8 @@ public class MethodTask extends GeneralTask<MethodSpec> {
             }
         }
 
-        if (!CollectionUtils.isEmpty(methodDefinition.getParameterDefinitions())) {
-            for (ParameterDefinition parameterDefinition : methodDefinition.getParameterDefinitions()) {
+        if (!CollectionUtils.isEmpty(methodDefinition.getParameterTypeDefinitions())) {
+            for (ParameterTypeDefinition parameterDefinition : methodDefinition.getParameterTypeDefinitions()) {
                 ParameterTask parameterTask = new ParameterTask(parameterDefinition);
                 builder.addParameter(parameterTask.run());
             }

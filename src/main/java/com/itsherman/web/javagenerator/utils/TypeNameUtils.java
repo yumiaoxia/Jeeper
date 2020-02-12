@@ -11,11 +11,11 @@ import java.util.List;
 public class TypeNameUtils {
 
 
-    public static TypeName getTypeName(TypeDefinition typeDefinition) throws ClassNotFoundException {
+    public static TypeName getTypeName(TypeDefinition typeDefinition){
         TypeName typeName;
         if(typeDefinition instanceof ClassTypeDefinition){
             ClassTypeDefinition classTypeDefinition = (ClassTypeDefinition)typeDefinition;
-            typeName = ClassName.get(ClassUtils.getClass(classTypeDefinition.getClassName()));
+            typeName = ClassName.get(classTypeDefinition.getClassType());
         }else if(typeDefinition instanceof TypeVariableDefinition){
             TypeVariableDefinition typeVariableDefinition = (TypeVariableDefinition)typeDefinition;
             typeName = TypeVariableName.get(typeVariableDefinition.getVariable());
@@ -30,18 +30,18 @@ public class TypeNameUtils {
             for (int i = 0; i < typeArguments.length; i++) {
                 typeNames[i] = getTypeName(typeArguments[i]);
             }
-            typeName = ParameterizedTypeName.get(ClassName.get(ClassUtils.getClass(parameterizedTypeDefinition.getRawTypeName())),typeNames);
+            typeName = ParameterizedTypeName.get(ClassName.get(parameterizedTypeDefinition.getRawType()),typeNames);
         }else if(typeDefinition instanceof WildcardTypeDefinition){
             WildcardTypeDefinition wildcardTypeDefinition = (WildcardTypeDefinition)typeDefinition;
             switch (wildcardTypeDefinition.getWildcardEnum()){
                 case SUPPER:
-                    typeName = WildcardTypeName.supertypeOf(ClassUtils.getClass(wildcardTypeDefinition.getBoundClassName()));
+                    typeName = WildcardTypeName.supertypeOf(wildcardTypeDefinition.getBoundClass());
                     break;
                 case SUB:
-                    typeName = WildcardTypeName.subtypeOf(ClassUtils.getClass(wildcardTypeDefinition.getBoundClassName()));
+                    typeName = WildcardTypeName.subtypeOf(wildcardTypeDefinition.getBoundClass());
                     break;
                 default:
-                    typeName = WildcardTypeName.get(ClassUtils.getClass(wildcardTypeDefinition.getBoundClassName()));
+                    typeName = WildcardTypeName.get(wildcardTypeDefinition.getBoundClass());
                     break;
             }
         }else{

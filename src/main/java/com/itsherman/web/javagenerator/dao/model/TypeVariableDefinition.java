@@ -4,6 +4,10 @@ public class TypeVariableDefinition implements TypeDefinition {
 
     private String variable;
 
+    public TypeVariableDefinition(String variable) {
+        this.variable = variable;
+    }
+
     public String getVariable() {
         return variable;
     }

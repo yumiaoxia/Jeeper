@@ -10,7 +10,7 @@ public class MethodDefinition extends ModelDefinition {
 
     private String methodName;
 
-    private ParameterizedType returnType;
+    private TypeDefinition returnType;
 
     private Modifier[] modifiers;
 
@@ -18,31 +18,31 @@ public class MethodDefinition extends ModelDefinition {
 
     private List<Map.Entry<String, Object[]>> codeList = Collections.emptyList();
 
-    private List<Class<? extends Exception>> throwsExceptionTypes = Collections.emptyList();
+    private List<Class> throwsExceptionTypes = Collections.emptyList();
 
-    private List<ParameterDefinition> parameterDefinitions = Collections.emptyList();
+    private List<ParameterTypeDefinition> parameterTypeDefinitions = Collections.emptyList();
 
-    public MethodDefinition(String signature, String methodName,ParameterizedType returnType, Modifier... modifiers) {
+    public MethodDefinition(String signature, String methodName,TypeDefinition returnType, Modifier... modifiers) {
         super(signature);
         this.methodName = methodName;
         this.returnType = returnType;
         this.modifiers = modifiers;
     }
 
-    public List<Class<? extends Exception>> getThrowsExceptionTypes() {
+    public List<Class> getThrowsExceptionTypes() {
         return throwsExceptionTypes;
     }
 
-    public void setThrowsExceptionTypes(List<Class<? extends Exception>> throwsExceptionTypes) {
+    public void setThrowsExceptionTypes(List<Class> throwsExceptionTypes) {
         this.throwsExceptionTypes = throwsExceptionTypes;
     }
 
-    public List<ParameterDefinition> getParameterDefinitions() {
-        return parameterDefinitions;
+    public List<ParameterTypeDefinition> getParameterTypeDefinitions() {
+        return parameterTypeDefinitions;
     }
 
-    public void setParameterDefinitions(List<ParameterDefinition> parameterDefinitions) {
-        this.parameterDefinitions = parameterDefinitions;
+    public void setParameterTypeDefinitions(List<ParameterTypeDefinition> parameterTypeDefinitions) {
+        this.parameterTypeDefinitions = parameterTypeDefinitions;
     }
 
     public String getMethodName() {
@@ -53,11 +53,11 @@ public class MethodDefinition extends ModelDefinition {
         this.methodName = methodName;
     }
 
-    public ParameterizedType getReturnType() {
+    public TypeDefinition getReturnType() {
         return returnType;
     }
 
-    public void setReturnType(ParameterizedType returnType) {
+    public void setReturnType(TypeDefinition returnType) {
         this.returnType = returnType;
     }
 

@@ -2,17 +2,17 @@ package com.itsherman.web.javagenerator.dao.model;
 
 public class ClassTypeDefinition implements TypeDefinition{
 
-    private String className;
+    private Class classType;
 
-    public ClassTypeDefinition(String className) {
-        this.className = className;
+    public ClassTypeDefinition(Class classType) {
+        this.classType = classType;
     }
 
-    public String getClassName() {
-        return className;
+    public Class getClassType() {
+        return classType;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setClassType(Class classType) {
+        this.classType = classType;
     }
 }

@@ -6,10 +6,11 @@ public class WildcardTypeDefinition implements TypeDefinition {
 
     private WildcardEnum wildcardEnum;
 
-    private String boundClassName;
+    private Class boundClass;
 
-    public WildcardTypeDefinition(WildcardEnum wildcardEnum) {
+    public WildcardTypeDefinition(WildcardEnum wildcardEnum, Class boundClass) {
         this.wildcardEnum = wildcardEnum;
+        this.boundClass = boundClass;
     }
 
     public WildcardEnum getWildcardEnum() {
@@ -20,11 +21,11 @@ public class WildcardTypeDefinition implements TypeDefinition {
         this.wildcardEnum = wildcardEnum;
     }
 
-    public String getBoundClassName() {
-        return boundClassName;
+    public Class getBoundClass() {
+        return boundClass;
     }
 
-    public void setBoundClassName(String boundClassName) {
-        this.boundClassName = boundClassName;
+    public void setBoundClass(Class boundClass) {
+        this.boundClass = boundClass;
     }
 }

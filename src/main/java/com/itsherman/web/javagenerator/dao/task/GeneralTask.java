@@ -15,6 +15,6 @@ public abstract class GeneralTask<T> implements Task<T> {
     }
 
     @Override
-    public abstract T run();
+    public abstract T run() throws ClassNotFoundException;
 
 }
