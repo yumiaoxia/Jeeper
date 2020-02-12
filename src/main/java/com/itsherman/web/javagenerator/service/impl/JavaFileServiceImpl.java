@@ -1,6 +1,6 @@
 package com.itsherman.web.javagenerator.service.impl;
 
-import com.itsherman.web.javagenerator.dao.model.CLassDefinition;
+import com.itsherman.web.javagenerator.dao.model.ClassDefinition;
 import com.itsherman.web.javagenerator.dao.model.JavaFileDefinition;
 import com.itsherman.web.javagenerator.dao.task.JavaFileTask;
 import com.itsherman.web.javagenerator.service.JavaFileService;
@@ -21,7 +21,7 @@ public class JavaFileServiceImpl implements JavaFileService {
     @Override
     public JavaFile createJavaFile(JavaFileVO javaFileVO, String signature) throws ClassNotFoundException {
         ClassVO classVO = javaFileVO.getClassVO();
-        CLassDefinition CLassDefinition = javaTypeService.createJavaType(classVO);
+        ClassDefinition CLassDefinition = javaTypeService.createJavaType(classVO);
         JavaFileDefinition javaFileDefinition = new JavaFileDefinition(null, CLassDefinition);
         JavaFileTask fileTask = new JavaFileTask(javaFileDefinition);
         return fileTask.run();

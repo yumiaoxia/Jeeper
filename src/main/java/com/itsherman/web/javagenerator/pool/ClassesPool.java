@@ -25,10 +25,10 @@ public class ClassesPool {
 
     @PostConstruct
     public void initClasses() {
-        String[] packagePaths = referencePackageConfig.getReferencePackages();
-        for (int i = 0; i < packagePaths.length; i++) {
+        List<String> packagePaths = referencePackageConfig.getReferencePackages();
+        for (int i = 0; i < packagePaths.size(); i++) {
             try {
-                List<String> classNames = PackageUtils.getClassName(packagePaths[i]);
+                List<String> classNames = PackageUtils.getClassName(packagePaths.get(i));
                 for (String className : classNames) {
                     classes.add(ClassUtils.getClass(className));
                 }

@@ -7,7 +7,7 @@ import javax.lang.model.element.Modifier;
 import java.util.Collections;
 import java.util.List;
 
-public class CLassDefinition extends ModelDefinition {
+public class ClassDefinition extends ModelDefinition {
 
     private TypeSpec.Kind kind;
 
@@ -21,7 +21,7 @@ public class CLassDefinition extends ModelDefinition {
 
     private Modifier[] modifiers;
 
-    private List<CLassDefinition> innerCLassDefinitions = Collections.emptyList();
+    private List<ClassDefinition> innerClassDefinitions = Collections.emptyList();
 
     private List<AnnotationDefinition> annotationDefinitions = Collections.emptyList();
 
@@ -33,7 +33,7 @@ public class CLassDefinition extends ModelDefinition {
 
     private List<String> enumConstants = Collections.emptyList();
 
-    public CLassDefinition(String signature, TypeSpec.Kind kind, Modifier... modifiers) {
+    public ClassDefinition(String signature, TypeSpec.Kind kind, Modifier... modifiers) {
         super(signature);
         this.kind = kind;
         this.typeName = typeName;
@@ -89,12 +89,12 @@ public class CLassDefinition extends ModelDefinition {
     }
 
 
-    public List<CLassDefinition> getInnerCLassDefinitions() {
-        return innerCLassDefinitions;
+    public List<ClassDefinition> getInnerClassDefinitions() {
+        return innerClassDefinitions;
     }
 
-    public void setInnerCLassDefinitions(List<CLassDefinition> innerCLassDefinitions) {
-        this.innerCLassDefinitions = innerCLassDefinitions;
+    public void setInnerClassDefinitions(List<ClassDefinition> innerClassDefinitions) {
+        this.innerClassDefinitions = innerClassDefinitions;
     }
 
     public List<AnnotationDefinition> getAnnotationDefinitions() {

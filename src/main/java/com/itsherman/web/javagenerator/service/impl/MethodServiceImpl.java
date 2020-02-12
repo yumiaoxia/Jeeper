@@ -8,10 +8,12 @@ import com.itsherman.web.javagenerator.service.ParameterService;
 import com.itsherman.web.javagenerator.service.vo.*;
 import com.itsherman.web.javagenerator.utils.DefinitionConvertUtils;
 import org.apache.commons.lang3.ClassUtils;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Service
 public class MethodServiceImpl implements MethodService {
 
     @Resource

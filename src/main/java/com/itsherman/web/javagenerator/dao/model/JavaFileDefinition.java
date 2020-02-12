@@ -7,11 +7,11 @@ public class JavaFileDefinition extends ModelDefinition {
 
     private String packageName;
 
-    private CLassDefinition CLassDefinition;
+    private ClassDefinition CLassDefinition;
 
     private Map<String, Object[]> commentMap = new HashMap<>();
 
-    public JavaFileDefinition(String signature, CLassDefinition CLassDefinition) {
+    public JavaFileDefinition(String signature, ClassDefinition CLassDefinition) {
         super(signature);
         this.CLassDefinition = CLassDefinition;
     }
@@ -24,11 +24,11 @@ public class JavaFileDefinition extends ModelDefinition {
         this.packageName = packageName;
     }
 
-    public CLassDefinition getCLassDefinition() {
+    public ClassDefinition getCLassDefinition() {
         return CLassDefinition;
     }
 
-    public void setCLassDefinition(CLassDefinition CLassDefinition) {
+    public void setCLassDefinition(ClassDefinition CLassDefinition) {
         this.CLassDefinition = CLassDefinition;
     }
 

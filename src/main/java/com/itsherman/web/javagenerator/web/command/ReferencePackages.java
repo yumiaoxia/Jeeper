@@ -1,14 +1,12 @@
-package com.itsherman.web.javagenerator.config;
+package com.itsherman.web.javagenerator.web.command;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
 
-@Component
-@ConfigurationProperties(prefix = "jeeper.config")
-public class ReferencePackageConfig {
+public class ReferencePackages {
 
+    @ApiModelProperty("关联包名列表")
     private List<String> referencePackages;
 
     public List<String> getReferencePackages() {
