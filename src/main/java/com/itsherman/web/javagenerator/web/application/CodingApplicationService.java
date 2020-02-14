@@ -1,18 +1,15 @@
 package com.itsherman.web.javagenerator.web.application;
 
-import com.itsherman.web.common.response.ApiResponse;
+import com.itsherman.web.common.exception.ServiceException;
 import com.itsherman.web.javagenerator.config.ReferencePackageConfig;
+import com.itsherman.web.javagenerator.exception.ErrorCode;
 import com.itsherman.web.javagenerator.pool.ClassesPool;
-import com.itsherman.web.javagenerator.utils.PackageUtils;
 import com.itsherman.web.javagenerator.web.command.ReferencePackages;
-import org.apache.commons.lang3.ClassUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -34,6 +31,12 @@ public class CodingApplicationService {
 
 
     public void addReferencePackages(ReferencePackages command) {
+        for (String referencePackage : command.getReferencePackages()) {
+            List<String> packages = listAllPackages();
+            if (!packages.contains(referencePackage)) {
+                throw ServiceException.of(ErrorCode.PACKAGE_NOT_FOUND, referencePackage);
+            }
+        }
         referencePackageConfig.getReferencePackages().addAll(command.getReferencePackages());
         classesPool.initClasses();
     }

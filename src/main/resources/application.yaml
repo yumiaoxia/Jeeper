@@ -8,4 +8,13 @@ jeeper:
       org.springframework.stereotype,
       javax.annotation,
       com.idaoben.web.common.api.bean
-
+spring:
+  common-web:
+    messages:
+      encoding: UTF-8
+      basename: classpath:i18n/messages
+    format:
+      pattern:
+        date-time: dd-MM-yyyy HH:mm:ss
+    api-log:
+      type: none
