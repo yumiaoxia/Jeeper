@@ -17,4 +17,5 @@ spring:
       pattern:
         date-time: dd-MM-yyyy HH:mm:ss
     api-log:
-      type: none
+      type: all
+
